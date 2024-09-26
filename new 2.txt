@@ -1,0 +1,41 @@
+import pyodbc
+import openai
+from langchain_openai import AzureOpenAI
+server = 'DESKTOP-OI2D5KG'
+database = 'MusicRecomendationDB'
+azure_endpoint = "https://aisqlintegration.openai.azure.com/"
+api_key = "d912d0d7acee490ab6e6adc797abe8ff"
+ 
+ 
+def get_music_recommendations():
+ 
+    cnxn = pyodbc.connect(
+        'DRIVER={SQL Server};SERVER=DESKTOP-OI2D5KG;DATABASE=MusicRecomendationDB')
+    cursor = cnxn.cursor()
+    query = "SELECT McChannelId from AudioChannelEvents where PlayId =190877165"
+    cursor.execute(query)
+    # Fetch all rows at once
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+ 
+ 
+get_music_recommendations()
+ 
+ 
+# def langconnect():
+ 
+#     client = AzureOpenAI(
+#         model="gpt-4",
+#         api_version="2024-02-15-preview",
+#         api_key="d912d0d7acee490ab6e6adc797abe8ff",
+#         azure_endpoint="https://aisqlintegration.openai.azure.com/"
+#     )
+#     print(client)
+#     aws = client.invoke("Tell me a joke")
+#     print(aws)
+ 
+ 
+# langconnect()
+ 
+has context menu
